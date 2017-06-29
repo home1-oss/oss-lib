@@ -49,6 +49,6 @@ on_release_tag:
   - on_every_push
   only:
   - /^release.+$/
-  stage: deploy
   script:
   - bash ci.sh publish_release_tag
+  stage: deploy
