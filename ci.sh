@@ -24,6 +24,14 @@ eval "$(curl -s -L ${LIB_CI_SCRIPT})"
 export ORIGINAL_GRADLE_PROPERTIES="${GRADLE_PROPERTIES}"
 SPRING_BOOT_VERSIONS=( "1.4.2.RELEASE" )
 
+for command in ${COMMANDS_WILL_PERFORM[@]}; do
+    if [ "${command}" != "clean" ]; then
+        NEW_ARRAY+=("${element}")
+    fi
+done
+COMMANDS_WILL_PERFORM=("${NEW_ARRAY[@]}")
+unset NEW_ARRAY
+
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> execute '${COMMANDS_WILL_PERFORM[@]}' on spring-boot '${SPRING_BOOT_VERSIONS[@]}' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 for spring_boot_version in "${SPRING_BOOT_VERSIONS[@]}"; do
     export GRADLE_PROPERTIES="${ORIGINAL_GRADLE_PROPERTIES} -PspringBootVersion=${spring_boot_version}"
