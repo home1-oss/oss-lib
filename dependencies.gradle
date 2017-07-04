@@ -9,7 +9,7 @@ apply plugin: 'io.spring.dependency-management'
 
 dependencyManagement {
   imports {
-    mavenBom "cn.home1:oss-common-dependencies-spring-boot-${gradle.ext.springBootVersion}:${ossVersion}" // 下面的覆盖上面的
+    mavenBom "cn.home1:oss-common-dependencies-spring-boot-${gradle.ext.springBootVersion}:${ossCommonDependenciesVersion}" // 下面的覆盖上面的
     //mavenBom "org.apache.logging.log4j:log4j-bom:${log4jVersion}"
   }
   dependencies {
