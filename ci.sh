@@ -15,7 +15,7 @@ export GRADLE_INIT_SCRIPT="https://github.com/home1-oss/oss-build/raw/master/src
 
 ### OSS CI CALL REMOTE CI SCRIPT BEGIN
 if [ -z "${LIB_CI_SCRIPT}" ]; then LIB_CI_SCRIPT="https://github.com/home1-oss/oss-build/raw/master/src/main/ci-script/lib_ci.sh"; fi
-#if [ -z "${LIB_CI_SCRIPT}" ]; then LIB_CI_SCRIPT="http://gitlab.local:10080/home1-oss/oss-build/raw/master/src/main/ci-script/lib_ci.sh"; fi
+#if [ -z "${LIB_CI_SCRIPT}" ]; then LIB_CI_SCRIPT="http://gitlab.local:10080/home1-oss/oss-build/raw/develop/src/main/ci-script/lib_ci.sh"; fi
 echo "eval \$(curl -s -L ${LIB_CI_SCRIPT})"
 eval "$(curl -s -L ${LIB_CI_SCRIPT})"
 #source src/main/ci-script/lib_ci.sh
@@ -24,9 +24,11 @@ eval "$(curl -s -L ${LIB_CI_SCRIPT})"
 export ORIGINAL_GRADLE_PROPERTIES="${GRADLE_PROPERTIES}"
 SPRING_BOOT_VERSIONS=( "1.4.2.RELEASE" )
 
-for command in ${COMMANDS_WILL_PERFORM[@]}; do
+echo "SPRING_BOOT_VERSIONS: '${SPRING_BOOT_VERSIONS[@]}'"
+echo "COMMANDS_WILL_PERFORM: '${COMMANDS_WILL_PERFORM[@]}'"
+for command in "${COMMANDS_WILL_PERFORM[@]}"; do
     if [ "${command}" != "clean" ]; then
-        NEW_ARRAY+=("${element}")
+        NEW_ARRAY+=("${command}")
     fi
 done
 COMMANDS_WILL_PERFORM=("${NEW_ARRAY[@]}")
