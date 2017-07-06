@@ -1,3 +1,8 @@
+analysis:
+  stage: analysis
+  script:
+  - bash ci.sh analysis
+
 before_script:
 - export BUILD_SITE=true
 #- export LIB_CI_SCRIPT=https://github.com/home1-oss/oss-build/raw/master/src/main/ci-script/lib_ci.sh
@@ -41,11 +46,6 @@ on_release_push:
   script:
   - bash ci.sh clean test_and_build publish_artifact publish_site
   stage: publish
-
-analysis:
-  stage: analysis
-  script:
-  - bash ci.sh analysis
 
 stages:
 - analysis
