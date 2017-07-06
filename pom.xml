@@ -14,7 +14,7 @@
     <name>oss-lib</name>
     <packaging>pom</packaging>
     <url>https://github.com/home1-oss/oss-lib</url>
-    <version>1.0.8.OSS</version>
+    <version>1.0.9.OSS-SNAPSHOT</version>
 
     <ciManagement>
         <system>Travis CI</system>
