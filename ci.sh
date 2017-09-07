@@ -9,7 +9,7 @@ fi
 export BUILD_SITE_PATH_PREFIX="oss"
 export GRADLE_INIT_SCRIPT="https://github.com/home1-oss/oss-build/raw/master/src/main/gradle/init-oss-lib.gradle"
 #export GRADLE_INIT_SCRIPT="http://gitlab.local:10080/home1-oss/oss-build/raw/develop/src/main/gradle/init-oss-lib.gradle"
-
+#export GRADLE_INIT_SCRIPT="src/main/gradle/init-oss-lib.gradle"
 
 
 

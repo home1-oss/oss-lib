@@ -42,6 +42,7 @@ codesigning.asc
 secring.gpg
 
 deprecated/
+src/main/gradle/init-oss-lib.gradle
 **/src/site/markdown/README.md
 **/src/site/markdown/src/readme
 **/src/site/resources
