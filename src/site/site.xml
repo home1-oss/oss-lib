@@ -31,7 +31,7 @@
         <!--menu ref="parent" /-->
         <menu name="DOCUMENTATION">
             <item href="README.html" name="README" />
-            <item href="CONTRIBUTION.html" name="开发" />
+            <item href="CONTRIBUTION.html" name="CONTRIBUTION" />
         </menu>
         <menu ref="modules" />
         <menu ref="reports" inherit="bottom" />

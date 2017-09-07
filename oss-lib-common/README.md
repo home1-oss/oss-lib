@@ -1,36 +1,35 @@
 
 # oss-lib-common
-
 Common utils and components for open source stack libraries
 
-oss-lib成员共同使用的库, 同时包含一些spring-boot配置的扩展, 密码库等.
+Common library used by all home1-oss libraries, including extended spring-boot config and crypto utils.
 
-## spring-boot配置扩展
 
-包括一些自定义配置属性和annotation.
+## Extended spring-boot config
 
-我们自定义了一些配置属性, 你可以在 `AppProperties` 类中找到它们.
-我们自定义属性的原则是不与spring-boot提供的重复, 如果spring-boot已经提供了, 那么我们就直接使用它而不是再定义一个.
+- Custom properties in `AppProperties` class.
 
-我们还提供了一些annotation来控制Bean初始化
+- Annotations to control bean initializing.
+  + `@ConditionalOnAppType` - `app.type`
+  + `@ConditionalOnAppSecurity` - `app.security.enabled`
+  + `@ConditionalOnNotEnvProduction` - `spring.profile.active`
 
-+ `@ConditionalOnAppType` 识别 `app.type`
-+ `@ConditionalOnAppSecurity` 识别 `app.security.enabled`
-+ `@ConditionalOnNotEnvProduction` 识别 `spring.profile.active`
 
-## 密码库
+## Crypto utils
 
-简化复杂的密码库的使用, 并且可以在spring-boot自动配置时初始化加密/解密器.
-
-支持的方法有:
 + AES
 + RSA
 + JWT
 
-## 模板interpolate
+Simplifies the use of complex crypto libraries, 
+initialize encryptors / decryptors when spring-boot application is automatically configured.
 
-基于EL表达式实现, 可用在很多地方.
 
-## 其它小工具
+## Template interpolate
 
-过于琐碎, 在此不一一介绍, 可通过查看javadoc或源码了解详情.
+Based on EL expression.
+
+
+## Other utils
+
+See javadoc or source code.

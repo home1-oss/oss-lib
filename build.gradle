@@ -56,10 +56,10 @@ subprojects {
       'org.hamcrest:hamcrest-all',
       'junit:junit'
 
-    if ("1.4.x" == "${gradle.ext.springBootApi}") {
-      //testCompile file('testCompile.dependencies').readLines()
-      testCompile 'org.springframework.boot:spring-boot-test'
-    }
+    //if ("${gradle.ext.springBootApi}" >= "1.4.x") {
+    //  testCompile file('testCompile.dependencies').readLines()
+    testCompile 'org.springframework.boot:spring-boot-test'
+    //}
   }
 }
 
@@ -68,8 +68,8 @@ task testProperties {
   doLast {
     logging.captureStandardOutput LogLevel.QUIET
     logging.captureStandardError LogLevel.ERROR
-    if ( '1.4.1' < '1.4.2' ) { logger.quiet("1.4.1 < 1.4.2") } else { logger.quiet("1.4.1 > 1.4.2") }
-    if ( '1.3.x' < '1.4.x' ) { logger.quiet("1.3.x < 1.4.x") } else { logger.quiet("1.3.x > 1.4.x") }
+    if ( '1.5.4' < '1.5.6' ) { logger.quiet("1.5.4 < 1.5.6") } else { logger.quiet("1.5.4 > 1.5.6") }
+    if ( '1.4.x' < '1.5.x' ) { logger.quiet("1.4.x < 1.5.x") } else { logger.quiet("1.4.x > 1.5.x") }
     logging.captureStandardOutput LogLevel.INFO
   }
 }

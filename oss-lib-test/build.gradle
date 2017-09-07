@@ -2,14 +2,14 @@ dependencies {
   compile 'junit:junit',
     'org.springframework:spring-web',
     'org.springframework.boot:spring-boot'
-  if ("1.4.x" == "${gradle.ext.springBootApi}") {
+  if ("${gradle.ext.springBootApi}" >= "1.4.x") {
     compile 'org.springframework.boot:spring-boot-test'
   }
 
   optional 'org.springframework.boot:spring-boot-autoconfigure'
-  if ("${gradle.ext.springBootVersion}" >= "1.4.1") {
-    optional 'io.github.openfeign:feign-core'
-  } else{
-    optional 'com.netflix.feign:feign-core'
-  }
+  //if ("${gradle.ext.springBootVersion}" >= "1.4.1") {
+  optional 'io.github.openfeign:feign-core'
+  //} else{
+  //  optional 'com.netflix.feign:feign-core'
+  //}
 }
