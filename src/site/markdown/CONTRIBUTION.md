@@ -10,11 +10,11 @@
 
 ## Local build
 
-  `./ci.sh clean test_and_build analysis`
+  `BUILD_PUBLISH_DEPLOY_SEGREGATION=false ./ci.sh clean test_and_build analysis`
 
 ## Deploy into maven repository
 
-  `./ci.sh clean test_and_build analysis publish_artifact publish_site`
+  `BUILD_PUBLISH_DEPLOY_SEGREGATION=false ./ci.sh clean test_and_build analysis publish_artifact publish_site`
 
 ## References
 
