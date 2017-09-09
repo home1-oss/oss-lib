@@ -36,7 +36,7 @@
     </modules>
 
     <properties>
-        <oss-common-dependencies.version>1.0.12.OSS</oss-common-dependencies.version>
+        <oss-common-dependencies.version>1.0.15.OSS-SNAPSHOT</oss-common-dependencies.version>
         <spring-boot.version>1.5.6.RELEASE</spring-boot.version>
     </properties>
 

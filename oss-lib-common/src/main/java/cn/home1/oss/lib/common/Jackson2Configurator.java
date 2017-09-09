@@ -7,6 +7,7 @@ import static java.lang.Boolean.parseBoolean;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -26,6 +27,17 @@ import java.util.Optional;
  * Created by zhanghaolun on 16/7/28.
  */
 public interface Jackson2Configurator<T extends Enum<T> & Jackson2Configurator<T>> {
+
+  static Object getEnumValue(final Class<?> enumType, final String name) throws ReflectiveOperationException {
+    final Object result;
+    if (enumType != null) {
+      final Method method = enumType.getDeclaredMethod("valueOf", String.class);
+      result = method.invoke(enumType, name);
+    } else {
+      result = null;
+    }
+    return result;
+  }
 
   String JACKSON_JAXB_ENABLED = "jackson.jaxb.enabled";
   String XMLMAPPER_CLASSNAME = "com.fasterxml.jackson.dataformat.xml.XmlMapper";
@@ -78,6 +90,17 @@ public interface Jackson2Configurator<T extends Enum<T> & Jackson2Configurator<T
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         mapper.configure(JsonGenerator.Feature.QUOTE_NON_NUMERIC_NUMBERS, false);
         mapper.configure(JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS, true);
+
+        if (this.isXmlMapper(mapper)) {
+          try {
+            final Object feature = getEnumValue(MapperFeature.class, "INFER_CREATOR_FROM_CONSTRUCTOR_PROPERTIES");
+            // see: https://github.com/FasterXML/jackson-databind/issues/1218
+            mapper.configure((MapperFeature) feature, false);
+          } catch (final ReflectiveOperationException ex) {
+            log.info("Feature INFER_CREATOR_FROM_CONSTRUCTOR_PROPERTIES not found.", ex);
+          }
+        }
+
         return mapper;
       }
     },
@@ -131,8 +154,7 @@ public interface Jackson2Configurator<T extends Enum<T> & Jackson2Configurator<T
       }
     },
     /**
-     * see: http://wiki.fasterxml.com/JacksonJAXBAnnotations
-     * see: https://github.com/FasterXML/jackson-module-jaxb-annotations
+     * see: http://wiki.fasterxml.com/JacksonJAXBAnnotations see: https://github.com/FasterXML/jackson-module-jaxb-annotations
      */
     JACKSON2_JAXB_ANNOTATION_CONFIGUATOR {
 
@@ -156,7 +178,7 @@ public interface Jackson2Configurator<T extends Enum<T> & Jackson2Configurator<T
             final Class<?> enumType = this.findClass(MODULE_CLASS + "$Priority").orElse(null);
 
             final String priorityName = isXmlMapper ? "PRIMARY" : "SECONDARY";
-            final Object priority = this.getEnumValue(enumType, priorityName);
+            final Object priority = getEnumValue(enumType, priorityName);
             final Method setPriorityMethod = moduleClass.get().getDeclaredMethod("setPriority", enumType);
             setPriorityMethod.invoke(module, priority);
 
@@ -166,17 +188,6 @@ public interface Jackson2Configurator<T extends Enum<T> & Jackson2Configurator<T
           }
         }
         return mapper;
-      }
-
-      private Object getEnumValue(final Class<?> enumType, final String name) throws ReflectiveOperationException {
-        final Object result;
-        if (enumType != null) {
-          final Method method = enumType.getDeclaredMethod("valueOf", String.class);
-          result = method.invoke(enumType, name);
-        } else {
-          result = null;
-        }
-        return result;
       }
     };
 
